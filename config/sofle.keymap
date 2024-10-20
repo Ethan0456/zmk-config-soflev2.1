@@ -28,6 +28,26 @@
 #define ADJUST 3
 
 / {
+    macros {
+        zoom_in: zoom_in{
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LGUI>
+                , <&macro_tap &kp PLUS>
+                , <&macro_release &kp LGUI>
+                ;
+        };
+        zoom_out: zoom_out{
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings
+                = <&macro_press &kp LGUI>
+                , <&macro_tap &kp MINUS>
+                , <&macro_release &kp LGUI>
+                ;
+        };
+    };
 
     // defaults for triggers/steps: https://github.com/zmkfirmware/zmk/blob/main/app/boards/shields/sofle/sofle.dtsi
     // explanations of settings: https://zmk.dev/docs/config/encoders
@@ -110,7 +130,7 @@
                     &trans    &trans      &trans    &trans     &trans &trans  &trans    &trans   &trans    &trans
             >;
 
-            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp C_AC_ZOOM_IN C_AC_ZOOM_OUT>;
+            sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &inc_dec_kp &zoom_in &zoom_out>;
         };
 
         raise_layer {
